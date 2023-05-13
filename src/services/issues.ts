@@ -13,12 +13,21 @@ export interface Issue {
   judgedSeverity?: Severity;
 }
 
-function score(issue: Issue): number {
-  const ranking = issue.watson.score ?? 1;
+/**
+ * Returns the relevance of an issue according to some heuristics:
+ * - senior watsons are probably right most of the time, judge them first
+ * - a watson's score on the leaderboard probably means they are better at audits, judge them first
+ * - high severity issues are more important than medium severity issues, judge them first
+ * - issues that are already classified as 'false' by the system will be discarded anyways, don't judge them
+ * @param issue a finding from a Sherlock contest
+ * @returns the issue relevance
+ */
+function relevance(issue: Issue): number {
+  const score = issue.watson.score ?? 1;
   const senior = issue.watson.senior ? 1000 : 1;
   const severity =
     issue.severity === "high" ? 100 : issue.severity === "medium" ? 10 : 0;
-  return senior * ranking * severity;
+  return senior * score * severity;
 }
 
 export async function getIssues(): Promise<Issue[]> {
@@ -49,6 +58,6 @@ export async function getIssues(): Promise<Issue[]> {
     )
   );
 
-  const sortedIssues = issues.sort((a, b) => score(b) - score(a));
+  const sortedIssues = issues.sort((a, b) => relevance(b) - relevance(a));
   return sortedIssues;
 }

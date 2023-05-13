@@ -3,7 +3,7 @@ import { IssuesContext } from "../context/IssuesContext";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
 import { Issue } from "../services/issues";
-import { Box, Typography } from "@mui/material";
+import { Box, Divider, Paper, Typography } from "@mui/material";
 import IssueCard from "./IssueCard";
 
 function App() {
@@ -14,13 +14,20 @@ function App() {
 
   return (
     <Box sx={{ height: "calc(100vh)", display: "flex", gap: "20px" }}>
-      <Box sx={{ width: "25%" }}>
+      <Box sx={{ width: "25%", padding: "20px" }}>
         <Typography variant="h4">Judged</Typography>
         {judged.map((issue) => (
           <IssueCard issue={issue} />
         ))}
       </Box>
-      <Box sx={{ display: "flex", flexDirection: "column", width: "25%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          padding: "20px",
+          width: "25%",
+        }}
+      >
         <Typography variant="h4">Submissions</Typography>
         <Box
           sx={{
@@ -34,11 +41,11 @@ function App() {
           ))}
         </Box>
       </Box>
-      <Box sx={{ width: "50%" }}>
+      <Box sx={{ width: "50%", padding: "20px" }}>
         <Typography variant="h4">Issue</Typography>
         <Box
           sx={{
-            height: "calc(100vh - 50px)",
+            height: "calc(100vh - 80px)",
             overflowY: "scroll",
           }}
         >
