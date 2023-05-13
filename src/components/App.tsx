@@ -1,15 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { IssuesContext } from "../context/IssuesContext";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
-import { Issue } from "../services/issues";
 import { Box, Paper, Typography } from "@mui/material";
 import IssueCard from "./IssueCard";
 import Decision from "./Decision";
 
 function App() {
-  const { issues } = useContext(IssuesContext);
-  const [issue, setIssue] = useState<Issue | undefined>(issues[0]);
+  const { issues, issue, setIssue } = useContext(IssuesContext);
 
   const judged = issues.filter((issue) => issue.decidedSeverity);
 

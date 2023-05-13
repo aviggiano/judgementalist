@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Issue, Severity } from "../services/issues";
 import { Box, Card, CardContent, Chip, Typography } from "@mui/material";
 import { IssuesContext } from "../context/IssuesContext";
@@ -6,11 +6,13 @@ import Autocomplete from "./Autocomplete";
 
 function Decision({ issue }: { issue: Issue }) {
   const { issues, updateIssue } = useContext(IssuesContext);
-  const [decidedSeverity, setDecidedSeverity] = useState(issue.decidedSeverity);
 
   const decideSeverity = (decidedSeverity: Severity) => {
     updateIssue({ ...issue, decidedSeverity });
-    setDecidedSeverity(decidedSeverity);
+  };
+
+  const decideDuplication = (decidedDuplication: string) => {
+    updateIssue({ ...issue, decidedDuplication });
   };
 
   function SeverityDecision({ severity }: { severity: Severity }) {
@@ -28,12 +30,11 @@ function Decision({ issue }: { issue: Issue }) {
         onClick={() => decideSeverity(severity)}
         label={severity}
         color={color}
-        variant={decidedSeverity === severity ? "filled" : "outlined"}
+        variant={issue.decidedSeverity === severity ? "filled" : "outlined"}
       />
     );
   }
 
-  const duplication = issues.map((e) => e.title);
   return (
     <Box>
       <Card sx={{ height: "180px" }} variant="outlined">
@@ -57,9 +58,10 @@ function Decision({ issue }: { issue: Issue }) {
                 Duplication
               </Typography>
               <Autocomplete
-                onSelect={(i) => console.log(i.target.value)}
+                onChange={(e) => decideDuplication(e.target.value)}
                 id="duplication"
-                options={duplication}
+                values={issues.map((e) => e.title)}
+                value={issue.decidedDuplication}
               />
             </Box>
           </Box>

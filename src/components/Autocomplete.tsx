@@ -4,7 +4,7 @@ import parse from "autosuggest-highlight/parse";
 import match from "autosuggest-highlight/match";
 import { Popper } from "@mui/material";
 
-const CustomerPopper = (props: any) => {
+const CustomPopper = (props: any) => {
   const modifiers = [
     {
       name: "flip",
@@ -25,21 +25,24 @@ const CustomerPopper = (props: any) => {
 
 export default function AutocompleteComponent({
   id,
-  options,
-  onSelect,
+  value,
+  values,
+  onChange,
 }: {
   id: string;
-  options: string[];
-  onSelect?: (props: any) => void;
+  values: string[];
+  value?: string;
+  onChange?: (props: any) => void;
 }) {
   return (
     <Autocomplete
       id={id}
-      options={options}
+      options={values}
       getOptionLabel={(option) => option}
-      onSelect={onSelect}
+      onChange={onChange}
+      value={value}
       renderInput={(params) => <TextField {...params} margin="normal" />}
-      PopperComponent={(props) => <CustomerPopper {...props} />}
+      PopperComponent={(props) => <CustomPopper {...props} />}
       renderOption={(props, option, { inputValue }) => {
         const matches = match(option, inputValue, { insideWords: true });
         const parts = parse(option, matches);
