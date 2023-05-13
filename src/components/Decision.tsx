@@ -15,7 +15,7 @@ function Decision({ issue }: { issue: Issue }) {
     updateIssue({ ...issue, decidedDuplication });
   };
 
-  function SeverityDecision({ severity }: { severity: Severity }) {
+  function DecidedSeverity({ severity }: { severity: Severity }) {
     const color =
       severity === "high"
         ? "error"
@@ -48,9 +48,9 @@ function Decision({ issue }: { issue: Issue }) {
                 Severity
               </Typography>
               <Box sx={{ marginTop: "15px" }}>
-                <SeverityDecision severity="high" />
-                <SeverityDecision severity="medium" />
-                <SeverityDecision severity="false" />
+                <DecidedSeverity severity="high" />
+                <DecidedSeverity severity="medium" />
+                <DecidedSeverity severity="false" />
               </Box>
             </Box>
             <Box sx={{ width: "100%" }}>

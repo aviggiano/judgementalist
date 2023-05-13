@@ -16,7 +16,7 @@ function App() {
       <Box sx={{ width: "25%", padding: "20px" }}>
         <Typography variant="h4">Judged</Typography>
         {judged.map((issue) => (
-          <IssueCard key={issue.file} issue={issue} />
+          <IssueCard decidedCard key={issue.file} issue={issue} />
         ))}
       </Box>
       <Box
