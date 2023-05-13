@@ -8,7 +8,16 @@ export interface Issue {
   severity: Severity;
   title: string;
   markdown: string;
-  judgedSeverity?: Severity;
+
+  family?: string
+  judgedSeverity?: Severity
+}
+
+function score(issue: Issue): number {
+  const ranking = issue.watson.score ?? 1
+  const senior = issue.watson.senior ? 1000 : 1
+  const severity = issue.severity === 'high' ? 100 : issue.severity === 'medium' ? 10 : 0
+  return senior * ranking * severity
 }
 
 export async function getIssues(): Promise<Issue[]> {
@@ -38,5 +47,7 @@ export async function getIssues(): Promise<Issue[]> {
         })
     )
   );
-  return issues;
+
+  const sortedIssues = issues.sort((a, b) => score(b) - score(a))
+  return sortedIssues;
 }
