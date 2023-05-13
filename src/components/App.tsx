@@ -3,21 +3,22 @@ import { IssuesContext } from "../context/IssuesContext";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
 import { Issue } from "../services/issues";
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import IssueCard from "./IssueCard";
+import Decision from "./Decision";
 
 function App() {
   const { issues } = useContext(IssuesContext);
   const [issue, setIssue] = useState<Issue | undefined>(issues[0]);
 
-  const judged = issues.filter((issue) => issue.judgedSeverity);
+  const judged = issues.filter((issue) => issue.decidedSeverity);
 
   return (
-    <Box sx={{ height: "calc(100vh)", display: "flex", gap: "20px" }}>
+    <Box sx={{ height: "calc(100vh)", display: "flex" }}>
       <Box sx={{ width: "25%", padding: "20px" }}>
         <Typography variant="h4">Judged</Typography>
         {judged.map((issue) => (
-          <IssueCard issue={issue} />
+          <IssueCard key={issue.file} issue={issue} />
         ))}
       </Box>
       <Box
@@ -36,26 +37,44 @@ function App() {
             overflowY: "scroll",
           }}
         >
-          {issues.map((issue) => (
-            <IssueCard issue={issue} onClick={() => setIssue(issue)} />
-          ))}
+          <Paper elevation={2}>
+            {issues.map((issue) => (
+              <IssueCard
+                key={issue.file}
+                issue={issue}
+                onClick={() => setIssue(issue)}
+              />
+            ))}
+          </Paper>
         </Box>
       </Box>
       <Box sx={{ width: "50%", padding: "20px" }}>
         <Typography variant="h4">Issue</Typography>
         <Box
           sx={{
-            height: "calc(100vh - 80px)",
-            overflowY: "scroll",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           {issue && (
-            <MarkdownPreview
-              source={issue.markdown}
-              wrapperElement={{
-                "data-color-mode": "light",
+            <Box
+              sx={{
+                height: "calc(100vh - 80px - 180px)",
+                overflowY: "scroll",
               }}
-            />
+            >
+              <MarkdownPreview
+                source={issue.markdown}
+                wrapperElement={{
+                  "data-color-mode": "light",
+                }}
+              />
+            </Box>
+          )}
+          {issue && (
+            <Box>
+              <Decision issue={issue} />
+            </Box>
           )}
         </Box>
       </Box>

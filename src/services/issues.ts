@@ -9,8 +9,9 @@ export interface Issue {
   title: string;
   markdown: string;
 
-  family?: string;
-  judgedSeverity?: Severity;
+  decidedBest?: boolean;
+  decidedDuplication?: string;
+  decidedSeverity?: Severity;
 }
 
 /**
@@ -48,7 +49,6 @@ export async function getIssues(): Promise<Issue[]> {
             ({ name: author } as Watson);
           return {
             file,
-            issue: file,
             watson,
             severity: severity as Severity,
             title,
