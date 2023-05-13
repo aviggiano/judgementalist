@@ -3,7 +3,8 @@ import { IssuesContext } from "../context/IssuesContext";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
 import { Issue } from "../services/issues";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import IssueCard from "./IssueCard";
 
 function App() {
   const { issues } = useContext(IssuesContext);
@@ -12,16 +13,14 @@ function App() {
   const judged = issues.filter((issue) => issue.judgedSeverity);
 
   return (
-    <Box sx={{ height: "calc(100vh)", display: "flex" }}>
-      <Container sx={{ width: "25%" }}>
+    <Box sx={{ height: "calc(100vh)", display: "flex", gap: "20px" }}>
+      <Box sx={{ width: "25%" }}>
         <Typography variant="h4">Judged</Typography>
         {judged.map((issue) => (
-          <Button onClick={() => setIssue(issue)}>{issue.file}</Button>
+          <IssueCard issue={issue} />
         ))}
-      </Container>
-      <Container
-        sx={{ display: "flex", flexDirection: "column", width: "25%" }}
-      >
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "column", width: "25%" }}>
         <Typography variant="h4">Submissions</Typography>
         <Box
           sx={{
@@ -31,11 +30,11 @@ function App() {
           }}
         >
           {issues.map((issue) => (
-            <Button onClick={() => setIssue(issue)}>{issue.file}</Button>
+            <IssueCard issue={issue} onClick={() => setIssue(issue)} />
           ))}
         </Box>
-      </Container>
-      <Container sx={{ width: "50%" }}>
+      </Box>
+      <Box sx={{ width: "50%" }}>
         <Typography variant="h4">Issue</Typography>
         <Box
           sx={{
@@ -52,7 +51,7 @@ function App() {
             />
           )}
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 }
