@@ -3,7 +3,7 @@ import { IssuesContext } from "../context/IssuesContext";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
 import { Issue } from "../services/issues";
-import { Box, Divider, Paper, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import IssueCard from "./IssueCard";
 
 function App() {
