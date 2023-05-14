@@ -28,7 +28,7 @@ export function IssuesProvider({ children }: Props) {
   }, []);
 
   const updateIssue = (issue: Issue) => {
-    setIssues([...issues].map((i) => (i.file === issue.file ? issue : i)));
+    setIssues(issues.map((i) => (i.file === issue.file ? issue : i)));
     setIssue(issue);
   };
 

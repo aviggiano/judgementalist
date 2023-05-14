@@ -7,19 +7,11 @@ import Autocomplete from "./Autocomplete";
 function Decision({ issue }: { issue: Issue }) {
   const { issues, updateIssue } = useContext(IssuesContext);
 
-  const decideSeverity = (decidedSeverity: Severity) => {
-    updateIssue({ ...issue, decidedSeverity });
-  };
-
-  const decideDuplication = (decidedDuplication: string) => {
-    updateIssue({ ...issue, decidedDuplication });
-  };
-
-  function DecidedSeverity({ severity }: { severity: Severity }) {
+  function DecidedSeverity({ decidedSeverity }: { decidedSeverity: Severity }) {
     const color =
-      severity === "high"
+      decidedSeverity === "high"
         ? "error"
-        : severity === "medium"
+        : decidedSeverity === "medium"
         ? "warning"
         : "default";
 
@@ -27,10 +19,12 @@ function Decision({ issue }: { issue: Issue }) {
       <Chip
         size="small"
         sx={{ cursor: "pointer", width: "100%" }}
-        onClick={() => decideSeverity(severity)}
-        label={severity}
+        onClick={() => updateIssue({ ...issue, decidedSeverity })}
+        label={decidedSeverity}
         color={color}
-        variant={issue.decidedSeverity === severity ? "filled" : "outlined"}
+        variant={
+          issue.decidedSeverity === decidedSeverity ? "filled" : "outlined"
+        }
       />
     );
   }
@@ -48,9 +42,9 @@ function Decision({ issue }: { issue: Issue }) {
                 Severity
               </Typography>
               <Box sx={{ marginTop: "15px" }}>
-                <DecidedSeverity severity="high" />
-                <DecidedSeverity severity="medium" />
-                <DecidedSeverity severity="false" />
+                <DecidedSeverity decidedSeverity="high" />
+                <DecidedSeverity decidedSeverity="medium" />
+                <DecidedSeverity decidedSeverity="false" />
               </Box>
             </Box>
             <Box sx={{ width: "100%" }}>
@@ -59,7 +53,17 @@ function Decision({ issue }: { issue: Issue }) {
               </Typography>
               <Autocomplete
                 onChange={(e) => {
-                  decideDuplication(e.target.ariaLabel);
+                  const decidedDuplication = e.target.ariaLabel;
+                  const existingIssue = issues.find(
+                    (i) => i.decidedDuplication === decidedDuplication
+                  );
+                  const decidedSeverity =
+                    existingIssue?.decidedSeverity || issue.decidedSeverity;
+                  updateIssue({
+                    ...issue,
+                    decidedSeverity,
+                    decidedDuplication,
+                  });
                 }}
                 id="duplication"
                 values={issues.map((e) => e.title)}
