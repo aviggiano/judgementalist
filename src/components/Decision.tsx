@@ -1,11 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Issue, Severity } from "../services/issues";
 import { Box, Card, CardContent, Chip, Typography } from "@mui/material";
 import { IssuesContext } from "../context/IssuesContext";
 import Autocomplete from "./Autocomplete";
 
 function Decision({ issue }: { issue: Issue }) {
-  const [value, setValue] = useState(issue.decidedDuplication);
   const { issues, updateIssue } = useContext(IssuesContext);
 
   const decideSeverity = (decidedSeverity: Severity) => {
@@ -61,11 +60,10 @@ function Decision({ issue }: { issue: Issue }) {
               <Autocomplete
                 onChange={(e) => {
                   decideDuplication(e.target.ariaLabel);
-                  setValue(e.target.ariaLabel);
                 }}
                 id="duplication"
                 values={issues.map((e) => e.title)}
-                value={value}
+                value={issue.decidedDuplication || ""}
               />
             </Box>
           </Box>

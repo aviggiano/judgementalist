@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { IssuesContext } from "../context/IssuesContext";
+import { IssuesContext } from "./context/IssuesContext";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
 import { Box, Card, CardContent, Paper, Typography } from "@mui/material";
-import IssueCard from "./IssueCard";
-import Decision from "./Decision";
-import { relevance } from "../services/issues";
-import DecidedIssueCard from "./DecidedIssueCard";
+import IssueCard from "./components/IssueCard";
+import Decision from "./components/Decision";
+import { relevance } from "./services/issues";
+import DecidedIssueCard from "./components/DecidedIssueCard";
 
 function App() {
   const { issues, issue, setIssue } = useContext(IssuesContext);
@@ -61,7 +61,6 @@ function App() {
             sx={{
               display: "flex",
               flexDirection: "column",
-
               height: "calc(100vh - 60px)",
               overflowY: "scroll",
             }}

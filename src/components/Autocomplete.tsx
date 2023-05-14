@@ -48,7 +48,7 @@ export default function AutocompleteComponent({
         const parts = parse(option, matches);
 
         return (
-          <li {...props}>
+          <li key={option} {...props}>
             <div>
               {parts.map((part, index) => (
                 <span
