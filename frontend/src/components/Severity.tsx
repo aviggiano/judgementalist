@@ -19,6 +19,7 @@ function Severity({
       : "default";
   return (
     <Chip
+      size="small"
       sx={{
         width: "80px",
         textDecoration: variant === "outlined" ? "line-through" : "inherit",

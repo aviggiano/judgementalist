@@ -18,12 +18,13 @@ function DecidedIssueCard({
       <Card variant="outlined">
         <CardContent>
           <Box>
-            <Typography variant="h6">{decidedDuplication}</Typography>
+            <Typography variant="body1">{decidedDuplication}</Typography>
           </Box>
           <Box>
             <Severity issue={decidedIssues[0]} useDecidedSeverity />
             {decidedIssues.map((issue) => (
               <Chip
+                size="small"
                 sx={{
                   cursor: "pointer",
                 }}

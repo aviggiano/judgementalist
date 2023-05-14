@@ -1,8 +1,11 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import Severity from "./Severity";
-import { Issue } from "../context/IssuesContext";
+import { Issue, IssuesContext } from "../context/IssuesContext";
+import { useContext } from "react";
 
 function IssueCard({ issue, onClick }: { issue: Issue; onClick?: () => void }) {
+  const { issue: i } = useContext(IssuesContext);
+
   return (
     <Box
       sx={{
@@ -13,7 +16,12 @@ function IssueCard({ issue, onClick }: { issue: Issue; onClick?: () => void }) {
       <Card variant="outlined">
         <CardContent
           sx={{
-            backgroundColor: !issue.decidedSeverity ? "inherit" : "lightgray",
+            backgroundColor:
+              issue.file === i?.file
+                ? "lightblue"
+                : !issue.decidedSeverity
+                ? "inherit"
+                : "lightgray",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
