@@ -80,8 +80,16 @@ export function IssuesProvider({ children }: Props) {
   }, []);
 
   const updateIssue = (issue: Issue) => {
-    setIssues(issues.map((i) => (i.file === issue.file ? issue : i)));
-    setIssue(issue);
+    fetch(`/issues/${issue.file}`, {
+      method: "PATCH",
+      body: JSON.stringify(issue),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }).then(() => {
+      setIssues(issues.map((i) => (i.file === issue.file ? issue : i)));
+      setIssue(issue);
+    });
   };
 
   return (
