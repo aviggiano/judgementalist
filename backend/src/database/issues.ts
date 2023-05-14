@@ -61,7 +61,7 @@ export async function getIssue(file: string): Promise<Issue | undefined> {
 
 export async function updateIssue(file: string, issue: Issue): Promise<Issue> {
   const issues = (await getIssues()).map((i) =>
-    i.file === issue.file ? i : issue
+    i.file === issue.file ? issue : i
   );
   await database.set("issues", issues);
   return issue;
