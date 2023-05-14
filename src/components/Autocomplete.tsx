@@ -53,6 +53,7 @@ export default function AutocompleteComponent({
               {parts.map((part, index) => (
                 <span
                   key={index}
+                  aria-label={option}
                   style={{
                     fontWeight: part.highlight ? 700 : 400,
                   }}

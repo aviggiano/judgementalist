@@ -21,14 +21,24 @@ export interface Issue {
  * - high severity issues are more important than medium severity issues, judge them first
  * - issues that are already classified as 'false' by the system will be discarded anyways, don't judge them
  * @param issue a finding from a Sherlock contest
+ * @param sortByDecidedSeverity sort by decidedSeverity instead of severity
  * @returns the issue relevance
  */
-function relevance(issue: Issue): number {
+export function relevance(
+  issue: Issue,
+  sortByDecidedSeverity?: boolean
+): number {
   const score = issue.watson.score ?? 1;
   const senior = issue.watson.senior ? 1000 : 1;
   const severity =
     issue.severity === "high" ? 100 : issue.severity === "medium" ? 10 : 0;
-  return senior * score * severity;
+  const decidedSeverity =
+    issue.decidedSeverity === "high"
+      ? 100
+      : issue.decidedSeverity === "medium"
+      ? 10
+      : 0;
+  return senior * score * (sortByDecidedSeverity ? decidedSeverity : severity);
 }
 
 export async function getIssues(): Promise<Issue[]> {

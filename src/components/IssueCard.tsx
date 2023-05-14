@@ -2,15 +2,7 @@ import { Issue } from "../services/issues";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import Severity from "./Severity";
 
-function IssueCard({
-  issue,
-  onClick,
-  decidedCard,
-}: {
-  issue: Issue;
-  onClick?: () => void;
-  decidedCard?: boolean;
-}) {
+function IssueCard({ issue, onClick }: { issue: Issue; onClick?: () => void }) {
   return (
     <Box
       sx={{
@@ -21,32 +13,28 @@ function IssueCard({
       <Card variant="outlined">
         <CardContent
           sx={{
-            backgroundColor:
-              decidedCard || !issue.decidedSeverity ? "inherit" : "lightgray",
+            backgroundColor: !issue.decidedSeverity ? "inherit" : "lightgray",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            gap: "10px",
           }}
         >
           <Typography variant="body1" color="text.bold">
             {issue.title}
           </Typography>
-          <Box>
-            {decidedCard ? (
-              <>
-                {issue.decidedSeverity && (
-                  <Severity
-                    issue={{ ...issue, severity: issue.decidedSeverity }}
-                  />
-                )}
-                <Severity
-                  issue={issue}
-                  variant={issue.decidedSeverity ? "outlined" : "filled"}
-                />
-              </>
-            ) : (
-              <Severity issue={issue} />
-            )}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Severity issue={issue} />
+            <Typography variant="subtitle1">{issue.watson.name}</Typography>
+            <Typography variant="subtitle2">{issue.file}</Typography>
           </Box>
-          <Typography variant="subtitle1">{issue.watson.name}</Typography>
-          <Typography variant="subtitle2">{issue.file}</Typography>
         </CardContent>
       </Card>
     </Box>
