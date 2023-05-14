@@ -1,7 +1,6 @@
 import { useContext } from "react";
-import { Issue, Severity } from "../services/issues";
 import { Box, Card, CardContent, Chip, Typography } from "@mui/material";
-import { IssuesContext } from "../context/IssuesContext";
+import { Issue, IssuesContext, Severity } from "../context/IssuesContext";
 import Autocomplete from "./Autocomplete";
 
 function Decision({ issue }: { issue: Issue }) {

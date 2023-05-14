@@ -1,5 +1,5 @@
-import { Issue } from "../services/issues";
 import { Chip } from "@mui/material";
+import { Issue } from "../context/IssuesContext";
 
 function Severity({
   issue,

@@ -1,5 +1,31 @@
 import { useState, ReactNode, createContext, useEffect } from "react";
-import { Issue, getIssues } from "../services/issues";
+
+export type Severity = "high" | "medium" | "false";
+
+export interface Watson {
+  name: string;
+  days?: number;
+  is_team?: boolean;
+  payout?: number;
+  score?: number;
+  senior?: boolean;
+}
+
+export interface Issue {
+  file: string;
+  watson: Watson;
+  severity: Severity;
+  title: string;
+  markdown: string;
+
+  decidedBest?: boolean;
+  decidedDuplication?: string;
+  decidedSeverity?: Severity;
+}
+
+export function relevance(issue: Issue, x: boolean): number {
+  return 0;
+}
 
 interface IIssuesContext {
   issues: Issue[];
@@ -21,10 +47,12 @@ export function IssuesProvider({ children }: Props) {
   const [issue, setIssue] = useState<Issue | undefined>();
 
   useEffect(() => {
-    getIssues().then((is) => {
-      setIssues(is);
-      setIssue(is[0]);
-    });
+    fetch("/issues")
+      .then((res) => res.json())
+      .then((is) => {
+        setIssues(is);
+        setIssue(is[0]);
+      });
   }, []);
 
   const updateIssue = (issue: Issue) => {

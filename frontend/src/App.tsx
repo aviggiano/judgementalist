@@ -1,11 +1,10 @@
 import { useContext } from "react";
-import { IssuesContext } from "./context/IssuesContext";
+import { IssuesContext, relevance } from "./context/IssuesContext";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
 import { Box, Card, CardContent, Paper, Typography } from "@mui/material";
 import IssueCard from "./components/IssueCard";
 import Decision from "./components/Decision";
-import { relevance } from "./services/issues";
 import DecidedIssueCard from "./components/DecidedIssueCard";
 
 function App() {

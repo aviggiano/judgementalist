@@ -1,6 +1,6 @@
-import { Issue } from "../services/issues";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import Severity from "./Severity";
+import { Issue } from "../context/IssuesContext";
 
 function IssueCard({ issue, onClick }: { issue: Issue; onClick?: () => void }) {
   return (

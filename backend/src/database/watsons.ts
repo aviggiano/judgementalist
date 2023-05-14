@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export interface Watson {
   name: string;
   days?: number;
@@ -9,11 +11,10 @@ export interface Watson {
 
 export async function getWatsons(): Promise<Watson[]> {
   const url = "https://mainnet-contest.sherlock.xyz/stats/leaderboard";
-  const response = await fetch(url);
-  const body = await response.json();
-  const watsons: Watson[] = Object.keys(body).map((name) => ({
+  const { data } = await axios.get(url);
+  const watsons: Watson[] = Object.keys(data).map((name) => ({
     name,
-    ...body[name],
+    ...data[name],
   }));
   return watsons;
 }
