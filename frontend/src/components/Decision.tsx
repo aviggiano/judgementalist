@@ -28,8 +28,6 @@ function Decision({ issue }: { issue: Issue }) {
     );
   }
 
-  console.log(issue);
-
   return (
     <Box>
       <Card sx={{ height: "180px" }} variant="outlined">
