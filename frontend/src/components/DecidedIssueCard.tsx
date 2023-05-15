@@ -29,7 +29,9 @@ function DecidedIssueCard({
                   cursor: "pointer",
                 }}
                 onClick={() => setIssue(issue)}
-                label={`${issue.decidedDoublecheck ? "? " : ""}${issue.file}`}
+                label={`${issue.decidedDoublecheck ? "❓ " : ""}${
+                  issue.decidedBest ? "⭐ " : ""
+                }${issue.file}`}
               />
             ))}
           </Box>
