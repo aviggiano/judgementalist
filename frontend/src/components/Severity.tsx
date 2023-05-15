@@ -1,20 +1,11 @@
 import { Chip } from "@mui/material";
 import { Issue } from "../context/IssuesContext";
 
-function Severity({
-  issue,
-  variant,
-  useDecidedSeverity,
-}: {
-  issue: Issue;
-  variant?: any;
-  useDecidedSeverity?: boolean;
-}) {
-  const key = useDecidedSeverity ? "decidedSeverity" : "severity";
+function Severity({ issue, variant }: { issue: Issue; variant?: any }) {
   const color =
-    issue[key] === "high"
+    issue.severity === "high"
       ? "error"
-      : issue[key] === "medium"
+      : issue.severity === "medium"
       ? "warning"
       : "default";
   return (
@@ -24,7 +15,7 @@ function Severity({
         width: "80px",
         textDecoration: variant === "outlined" ? "line-through" : "inherit",
       }}
-      label={issue[key]}
+      label={issue.severity}
       color={color}
       variant={variant}
     />

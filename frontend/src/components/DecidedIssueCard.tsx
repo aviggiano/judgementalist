@@ -1,17 +1,26 @@
 import { Box, Card, CardContent, Chip, Typography } from "@mui/material";
 import { useContext } from "react";
 import { IssuesContext } from "../context/IssuesContext";
-import Severity from "./Severity";
+import DecidedSeverity from "./DecidedSeverity";
 
 function DecidedIssueCard({
   decidedDuplication,
+  index,
 }: {
   decidedDuplication: string;
+  index: number;
 }) {
   const { issues, setIssue } = useContext(IssuesContext);
   const decidedIssues = issues
     .filter((issue) => issue.decidedSeverity)
     .filter((issue) => issue.decidedDuplication === decidedDuplication);
+  const decidedIssue = decidedIssues[0];
+
+  const decidedSeverityHigh = new Set(
+    issues
+      .filter((issue) => issue.decidedSeverity === "high")
+      .map((issue) => issue.decidedDuplication)
+  ).size;
 
   return (
     <Box>
@@ -21,7 +30,14 @@ function DecidedIssueCard({
             <Typography variant="subtitle2">{decidedDuplication}</Typography>
           </Box>
           <Box>
-            <Severity issue={decidedIssues[0]} useDecidedSeverity />
+            <DecidedSeverity
+              issue={decidedIssue}
+              index={
+                decidedIssue.decidedSeverity === "high"
+                  ? index + 1
+                  : index + 1 - decidedSeverityHigh
+              }
+            />
             {decidedIssues.map((issue) => (
               <Chip
                 size="small"

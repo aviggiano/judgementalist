@@ -3,7 +3,15 @@ import Severity from "./Severity";
 import { Issue, IssuesContext } from "../context/IssuesContext";
 import { useContext } from "react";
 
-function IssueCard({ issue, onClick }: { issue: Issue; onClick?: () => void }) {
+function IssueCard({
+  issue,
+  at,
+  onClick,
+}: {
+  issue: Issue;
+  at: string;
+  onClick?: () => void;
+}) {
   const { issue: i } = useContext(IssuesContext);
 
   return (
@@ -39,6 +47,7 @@ function IssueCard({ issue, onClick }: { issue: Issue; onClick?: () => void }) {
             <Severity issue={issue} />
             <Typography variant="subtitle2">{issue.watson.name}</Typography>
             <Typography variant="subtitle2">{issue.file}</Typography>
+            <Typography variant="subtitle2">{at}</Typography>
           </Box>
         </CardContent>
       </Card>

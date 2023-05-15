@@ -43,9 +43,10 @@ function App() {
               overflowY: "scroll",
             }}
           >
-            {decidedDuplications.map((decidedDuplication) => (
+            {decidedDuplications.map((decidedDuplication, index) => (
               <DecidedIssueCard
                 key={decidedDuplication}
+                index={index}
                 decidedDuplication={decidedDuplication}
               />
             ))}
@@ -70,10 +71,11 @@ function App() {
             }}
           >
             <Paper elevation={2}>
-              {sortedIssues.map((issue) => (
+              {sortedIssues.map((issue, index) => (
                 <IssueCard
                   key={issue.file}
                   issue={issue}
+                  at={`${index}/${sortedIssues.length}`}
                   onClick={() => setIssue(issue)}
                 />
               ))}
