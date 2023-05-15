@@ -65,10 +65,11 @@ function Decision({ issue }: { issue: Issue }) {
                     (i: Issue) => i.decidedDuplication === decidedDuplication
                   );
 
+                  if (decidedDuplication !== issue.title && !existingIssue)
+                    return;
+
                   const decidedSeverity =
                     existingIssue?.decidedSeverity || issue.decidedSeverity;
-
-                  console.log(decidedDuplication);
 
                   updateIssue({
                     ...issue,
