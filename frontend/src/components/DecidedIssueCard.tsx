@@ -29,7 +29,7 @@ function DecidedIssueCard({
                   cursor: "pointer",
                 }}
                 onClick={() => setIssue(issue)}
-                label={issue.file}
+                label={`${issue.decidedDoublecheck ? "? " : ""}${issue.file}`}
               />
             ))}
           </Box>

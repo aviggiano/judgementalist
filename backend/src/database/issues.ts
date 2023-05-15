@@ -15,6 +15,7 @@ export interface Issue {
   decidedBest?: boolean;
   decidedDuplication?: string;
   decidedSeverity?: Severity;
+  decidedDoublecheck?: boolean;
 }
 
 export async function getIssues(): Promise<Issue[]> {

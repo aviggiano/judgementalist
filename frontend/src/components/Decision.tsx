@@ -1,10 +1,14 @@
 import { useContext } from "react";
 import { Box, Card, CardContent, Chip, Typography } from "@mui/material";
 import { Issue, IssuesContext, Severity } from "../context/IssuesContext";
+import HelpIcon from "@mui/icons-material/Help";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Autocomplete from "./AutocompleteIssues";
 
 function Decision({ issue }: { issue: Issue }) {
   const { issues, updateIssue } = useContext(IssuesContext);
+
+  const Help = issue.decidedDoublecheck ? HelpIcon : HelpOutlineIcon;
 
   function DecidedSeverity({ decidedSeverity }: { decidedSeverity: Severity }) {
     const color =
@@ -76,6 +80,20 @@ function Decision({ issue }: { issue: Issue }) {
                   )
                 )}
                 value={issue}
+              />
+            </Box>
+            <Box>
+              <Typography variant="h6" color="text.bold">
+                &nbsp;
+              </Typography>
+              <Help
+                onClick={() =>
+                  updateIssue({
+                    ...issue,
+                    decidedDoublecheck: !issue.decidedDoublecheck,
+                  })
+                }
+                sx={{ marginTop: "15px", cursor: "pointer" }}
               />
             </Box>
           </Box>

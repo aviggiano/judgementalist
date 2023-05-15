@@ -21,6 +21,7 @@ export interface Issue {
   decidedBest?: boolean;
   decidedDuplication?: string;
   decidedSeverity?: Severity;
+  decidedDoublecheck?: boolean;
 }
 
 /**
