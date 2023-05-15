@@ -3,12 +3,15 @@ import { Box, Card, CardContent, Chip, Typography } from "@mui/material";
 import { Issue, IssuesContext, Severity } from "../context/IssuesContext";
 import HelpIcon from "@mui/icons-material/Help";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import StarIcon from "@mui/icons-material/Star";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import Autocomplete from "./AutocompleteIssues";
 
 function Decision({ issue }: { issue: Issue }) {
   const { issues, updateIssue } = useContext(IssuesContext);
 
   const Help = issue.decidedDoublecheck ? HelpIcon : HelpOutlineIcon;
+  const Star = issue.decidedBest ? StarIcon : StarOutlineIcon;
 
   function DecidedSeverity({ decidedSeverity }: { decidedSeverity: Severity }) {
     const color =
@@ -83,7 +86,11 @@ function Decision({ issue }: { issue: Issue }) {
               />
             </Box>
             <Box>
-              <Typography variant="h6" color="text.bold">
+              <Typography
+                sx={{ marginBottom: "15px" }}
+                variant="h6"
+                color="text.bold"
+              >
                 &nbsp;
               </Typography>
               <Help
@@ -93,7 +100,16 @@ function Decision({ issue }: { issue: Issue }) {
                     decidedDoublecheck: !issue.decidedDoublecheck,
                   })
                 }
-                sx={{ marginTop: "15px", cursor: "pointer" }}
+                sx={{ cursor: "pointer" }}
+              />
+              <Star
+                onClick={() =>
+                  updateIssue({
+                    ...issue,
+                    decidedBest: !issue.decidedBest,
+                  })
+                }
+                sx={{ cursor: "pointer" }}
               />
             </Box>
           </Box>

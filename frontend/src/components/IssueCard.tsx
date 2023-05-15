@@ -16,12 +16,9 @@ function IssueCard({ issue, onClick }: { issue: Issue; onClick?: () => void }) {
       <Card variant="outlined">
         <CardContent
           sx={{
-            backgroundColor:
-              issue.file === i?.file
-                ? "lightblue"
-                : !issue.decidedSeverity
-                ? "inherit"
-                : "lightgray",
+            backgroundColor: !issue.decidedSeverity ? "inherit" : "lightgray",
+            border: "4px solid transparent",
+            borderColor: issue.file === i?.file ? "teal" : "none",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
