@@ -28,7 +28,7 @@ function IssueCard({ issue, onClick }: { issue: Issue; onClick?: () => void }) {
             gap: "10px",
           }}
         >
-          <Typography variant="body1" color="text.bold">
+          <Typography variant="subtitle2" color="text.bold">
             {issue.title}
           </Typography>
           <Box
@@ -40,7 +40,7 @@ function IssueCard({ issue, onClick }: { issue: Issue; onClick?: () => void }) {
             }}
           >
             <Severity issue={issue} />
-            <Typography variant="subtitle1">{issue.watson.name}</Typography>
+            <Typography variant="subtitle2">{issue.watson.name}</Typography>
             <Typography variant="subtitle2">{issue.file}</Typography>
           </Box>
         </CardContent>

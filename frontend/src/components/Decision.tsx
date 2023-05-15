@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Box, Card, CardContent, Chip, Typography } from "@mui/material";
 import { Issue, IssuesContext, Severity } from "../context/IssuesContext";
-import Autocomplete from "./Autocomplete";
+import Autocomplete from "./AutocompleteIssues";
 
 function Decision({ issue }: { issue: Issue }) {
   const { issues, updateIssue } = useContext(IssuesContext);
@@ -28,6 +28,8 @@ function Decision({ issue }: { issue: Issue }) {
     );
   }
 
+  console.log(issue);
+
   return (
     <Box>
       <Card sx={{ height: "180px" }} variant="outlined">
@@ -52,12 +54,17 @@ function Decision({ issue }: { issue: Issue }) {
               </Typography>
               <Autocomplete
                 onChange={(e) => {
-                  const decidedDuplication = e.target.ariaLabel;
+                  const decidedDuplication = e.target.value;
+
                   const existingIssue = issues.find(
-                    (i) => i.decidedDuplication === decidedDuplication
+                    (i: Issue) => i.decidedDuplication === decidedDuplication
                   );
+
                   const decidedSeverity =
                     existingIssue?.decidedSeverity || issue.decidedSeverity;
+
+                  console.log(decidedDuplication);
+
                   updateIssue({
                     ...issue,
                     decidedSeverity,
@@ -65,8 +72,12 @@ function Decision({ issue }: { issue: Issue }) {
                   });
                 }}
                 id="duplication"
-                values={issues.map((e) => e.title)}
-                value={issue.decidedDuplication || ""}
+                values={issues.sort((a, b) =>
+                  (b.decidedDuplication || "").localeCompare(
+                    a.decidedDuplication || ""
+                  )
+                )}
+                value={issue}
               />
             </Box>
           </Box>

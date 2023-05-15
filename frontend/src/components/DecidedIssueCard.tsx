@@ -18,7 +18,7 @@ function DecidedIssueCard({
       <Card variant="outlined">
         <CardContent>
           <Box>
-            <Typography variant="body1">{decidedDuplication}</Typography>
+            <Typography variant="subtitle2">{decidedDuplication}</Typography>
           </Box>
           <Box>
             <Severity issue={decidedIssues[0]} useDecidedSeverity />

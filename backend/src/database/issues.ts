@@ -19,16 +19,13 @@ export interface Issue {
 
 export async function getIssues(): Promise<Issue[]> {
   await database.connect();
-  const data = await database.get();
-  if (data.issues) return data.issues;
+  const is = await database.get("issues");
+  if (is) return is;
 
-  if (!data.issuesList) {
-    const issuesList = await fs.readdir("../issues");
-    await database.set("issuesList", issuesList);
-  }
+  const issuesList = await fs.readdir("../issues");
   const watsons = await getWatsons();
   const issues: Issue[] = await Promise.all(
-    (data.issuesList as string[]).map((file) =>
+    (issuesList as string[]).map((file) =>
       fs
         .readFile(`../issues/${file}`)
         .then((res) => res.toString())
@@ -60,9 +57,7 @@ export async function getIssue(file: string): Promise<Issue | undefined> {
 }
 
 export async function updateIssue(file: string, issue: Issue): Promise<Issue> {
-  const issues = (await getIssues()).map((i) =>
-    i.file === issue.file ? issue : i
-  );
+  const issues = (await getIssues()).map((i) => (i.file === file ? issue : i));
   await database.set("issues", issues);
   return issue;
 }

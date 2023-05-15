@@ -16,9 +16,14 @@ function App() {
   const decidedDuplicationsList = judged.map(
     (issue) => issue.decidedDuplication
   );
+
   const decidedDuplications = decidedDuplicationsList.filter(
     (value, index) => decidedDuplicationsList.indexOf(value) === index
   ) as string[];
+
+  const sortedIssues = issues.sort(
+    (a, b) => relevance(b) - relevance(a) + b.file.localeCompare(a.file)
+  );
 
   return (
     <Box
@@ -65,7 +70,7 @@ function App() {
             }}
           >
             <Paper elevation={2}>
-              {issues.map((issue) => (
+              {sortedIssues.map((issue) => (
                 <IssueCard
                   key={issue.file}
                   issue={issue}

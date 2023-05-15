@@ -25,7 +25,6 @@ export interface Issue {
 
 /**
  * Returns the relevance of an issue according to some heuristics:
- * - senior watsons are probably right most of the time, judge them first
  * - a watson's score on the leaderboard probably means they are better at audits, judge them first
  * - high severity issues are more important than medium severity issues, judge them first
  * - issues that are already classified as 'false' by the system will be discarded anyways, don't judge them
@@ -37,8 +36,7 @@ export function relevance(
   issue: Issue,
   sortByDecidedSeverity?: boolean
 ): number {
-  const score = issue.watson.score ?? 1;
-  const senior = issue.watson.senior ? 1000 : 1;
+  const score = issue.watson.score ? 1000 * issue.watson.score : 1;
   const severity =
     issue.severity === "high" ? 100 : issue.severity === "medium" ? 10 : 0;
   const decidedSeverity =
@@ -47,7 +45,7 @@ export function relevance(
       : issue.decidedSeverity === "medium"
       ? 10
       : 0;
-  return senior * score * (sortByDecidedSeverity ? decidedSeverity : severity);
+  return sortByDecidedSeverity ? decidedSeverity : score + severity;
 }
 
 interface IIssuesContext {
@@ -72,7 +70,6 @@ export function IssuesProvider({ children }: Props) {
   useEffect(() => {
     fetch("/issues")
       .then((res) => res.json())
-      .then((is: Issue[]) => is.sort((a, b) => relevance(b) - relevance(a)))
       .then((is) => {
         setIssues(is);
         setIssue(is[0]);

@@ -3,6 +3,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import parse from "autosuggest-highlight/parse";
 import match from "autosuggest-highlight/match";
 import { Popper } from "@mui/material";
+import { Issue } from "../context/IssuesContext";
 
 const CustomPopper = (props: any) => {
   const modifiers = [
@@ -23,37 +24,37 @@ const CustomPopper = (props: any) => {
   );
 };
 
-export default function AutocompleteComponent({
+export default function AutocompleteIssues({
   id,
   value,
   values,
   onChange,
 }: {
   id: string;
-  values: string[];
-  value?: string;
+  values: Issue[];
+  value?: Issue;
   onChange?: (props: any) => void;
 }) {
   return (
     <Autocomplete
       id={id}
       options={values}
-      getOptionLabel={(option) => option}
-      onChange={onChange}
+      getOptionLabel={(option) => option.decidedDuplication || option.title}
+      onSelect={onChange}
+      groupBy={(option) => option.decidedDuplication || "N/A"}
       value={value}
       renderInput={(params) => <TextField {...params} margin="normal" />}
       PopperComponent={(props) => <CustomPopper {...props} />}
       renderOption={(props, option, { inputValue }) => {
-        const matches = match(option, inputValue, { insideWords: true });
-        const parts = parse(option, matches);
+        const matches = match(option.title, inputValue, { insideWords: true });
+        const parts = parse(option.title, matches);
 
         return (
-          <li key={option} {...props}>
+          <li {...props} key={option.file}>
             <div>
-              {parts.map((part, index) => (
+              {parts.map((part) => (
                 <span
-                  key={index}
-                  aria-label={option}
+                  key={option.file}
                   style={{
                     fontWeight: part.highlight ? 700 : 400,
                   }}
