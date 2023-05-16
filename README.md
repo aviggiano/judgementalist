@@ -31,9 +31,6 @@ PRs are welcome!
 
 Here are some specific areas where your help would make a big difference:
 
-- Issue Similarity: using pattern matching to suggest issues that are similar so that they can be automatically marked as duplicates
+- Automated Issue Similarity Detection: using pattern matching to suggest issues that are similar so that they can be automatically marked as duplicates
 - Automated Rating for Invalid Submissions: automatically rating submissions that don't meet certain criteria. For example, Sherlock marks "centralization risk" as `false`, so it could automatically discard those issues.
-
-
-
-
+- Filesystem Database Improvement: migrating from a `db.json` filesystem database to a DBMS
