@@ -1,5 +1,5 @@
 {
-  "name": "judgemental",
+  "name": "judgementalist",
   "version": "1.0.0",
   "scripts": {
     "postinstall": "yarn frontend && yarn backend",
@@ -8,10 +8,10 @@
     "start": "( cd backend && yarn start )"
   },
   "bin": {
-    "judgemental": "yarn start"
+    "judgementalist": "yarn start"
   },
-  "description": "Judgemental — judge Sherlock contests faster",
-  "repository": "git@github.com:aviggiano/judgemental.git",
+  "description": "Judgementalist — judge Sherlock contests faster",
+  "repository": "git@github.com:aviggiano/judgementalist.git",
   "author": "Antonio Guilherme Ferreira Viggiano <agfviggiano@gmail.com>",
   "license": "MIT"
 }

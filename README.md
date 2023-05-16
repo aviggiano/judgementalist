@@ -1,3 +1,3 @@
-# judgemental
+# judgementalist
 
-Judgemental — judge Sherlock contests faster
+Judgementalist — judge Sherlock contests faster
