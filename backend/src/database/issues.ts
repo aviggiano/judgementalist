@@ -23,14 +23,14 @@ export async function getIssues(): Promise<Issue[]> {
   const is = await database.get("issues");
   if (is) return is;
 
-  const issuesList = (await fs.readdir("..")).filter((name) =>
-    name.match(/\d\d\d\.md/)
-  );
+  const files = await fs.readdir(".");
+  console.log(files);
+  const issuesList = files.filter((name) => name.match(/\d\d\d\.md/));
   const watsons = await getWatsons();
   const issues: Issue[] = await Promise.all(
     (issuesList as string[]).map((file) =>
       fs
-        .readFile(`../${file}`)
+        .readFile(`./${file}`)
         .then((res) => res.toString())
         .then((markdown) => {
           const lines = markdown.split("\n");
