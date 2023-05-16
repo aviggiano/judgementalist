@@ -8,7 +8,7 @@ import Decision from "./components/Decision";
 import DecidedIssueCard from "./components/DecidedIssueCard";
 
 function App() {
-  const { issues, issue, setIssue, done } = useContext(IssuesContext);
+  const { issues, issue, setIssue, done, isDone } = useContext(IssuesContext);
 
   const judged = issues
     .filter((issue) => issue.decidedSeverity)
@@ -97,8 +97,11 @@ function App() {
             }}
           >
             <Typography variant="h4">Issue</Typography>
-            <Box onClick={() => done()} sx={{ cursor: "pointer" }}>
-              <Typography variant="h4">🚀</Typography>
+            <Box
+              onClick={() => (isDone ? undefined : done())}
+              sx={{ cursor: isDone ? "inherit" : "pointer" }}
+            >
+              <Typography variant="h4">{isDone ? "🎉" : "🚀"}</Typography>
             </Box>
           </Box>
           <Box

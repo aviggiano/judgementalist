@@ -55,6 +55,7 @@ interface IIssuesContext {
   setIssue: (issue: Issue) => void;
   updateIssue: (issue: Issue) => void;
   done: () => void;
+  isDone: boolean;
 }
 
 export const IssuesContext = createContext<IIssuesContext>(
@@ -68,6 +69,7 @@ type Props = {
 export function IssuesProvider({ children }: Props) {
   const [issues, setIssues] = useState<Issue[]>([]);
   const [issue, setIssue] = useState<Issue | undefined>();
+  const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
     fetch("/issues")
@@ -97,12 +99,12 @@ export function IssuesProvider({ children }: Props) {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    });
+    }).then(() => setIsDone(true));
   };
 
   return (
     <IssuesContext.Provider
-      value={{ issues, updateIssue, issue, setIssue, done }}
+      value={{ issues, updateIssue, issue, setIssue, done, isDone }}
     >
       {children}
     </IssuesContext.Provider>
