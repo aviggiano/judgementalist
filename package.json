@@ -1,0 +1,17 @@
+{
+  "name": "judgemental",
+  "version": "1.0.0",
+  "scripts": {
+    "postinstall": "yarn frontend && yarn backend",
+    "frontend": "( cd frontend && yarn && yarn build )",
+    "backend": "( cd backend && yarn && yarn build )",
+    "start": "( cd backend && yarn start )"
+  },
+  "bin": {
+    "judgemental": "yarn start"
+  },
+  "description": "Judgemental — judge Sherlock contests faster",
+  "repository": "git@github.com:aviggiano/judgemental.git",
+  "author": "Antonio Guilherme Ferreira Viggiano <agfviggiano@gmail.com>",
+  "license": "MIT"
+}

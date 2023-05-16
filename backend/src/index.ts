@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import path from "path";
 import dotenv from "dotenv";
 import config from "./config";
 import { getIssue, getIssues, updateIssue, done } from "./database/issues";
@@ -10,10 +11,7 @@ const port = config.port;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
-});
+app.use(express.static(path.join(__dirname, "../../frontend", "build")));
 
 app.get("/issues", async (req: Request, res: Response) => {
   res.json(await getIssues());
