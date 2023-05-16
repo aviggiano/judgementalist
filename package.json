@@ -6,7 +6,7 @@
     "contracts",
     "audit"
   ],
-  "version": "1.0.9",
+  "version": "1.0.11",
   "scripts": {
     "prepublish": "yarn frontend && yarn backend",
     "frontend": "( cd frontend && yarn && yarn build )",
