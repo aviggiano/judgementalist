@@ -17,7 +17,7 @@
     "frontend/build"
   ],
   "bin": {
-    "judgementalist": "node backend/build/index.js"
+    "judgementalist": "backend/build/index.js"
   },
   "description": "Judgementalist — judge Sherlock contests faster",
   "repository": "git@github.com:aviggiano/judgementalist.git",
