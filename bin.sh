@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-node backend/dist/index.js
+node backend/build/index.js

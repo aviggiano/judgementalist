@@ -13,10 +13,9 @@
     "backend": "( cd backend && yarn && yarn build )"
   },
   "files": [
-    "backend/dist",
-    "backend/node_modules",
+    "backend/build",
     "frontend/build",
-    "bin"
+    "bin.sh"
   ],
   "bin": {
     "judgementalist": "bin.sh"
