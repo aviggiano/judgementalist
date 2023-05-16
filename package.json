@@ -6,12 +6,16 @@
     "contracts",
     "audit"
   ],
-  "version": "1.0.5",
+  "version": "1.0.6",
   "scripts": {
     "prepublish": "yarn frontend && yarn backend",
     "frontend": "( cd frontend && yarn && yarn build )",
     "backend": "( cd backend && yarn && yarn build )"
   },
+  "files": [
+    "backend/dist",
+    "frontend/build"
+  ],
   "bin": {
     "judgementalist": "backend/dist/index.js"
   },
