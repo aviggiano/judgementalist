@@ -1,6 +1,7 @@
 {
   "name": "judgementalist",
-  "version": "1.0.0",
+  "keywords": ["sherlock", "smart", "contracts", "audit"],
+  "version": "1.0.1",
   "scripts": {
     "postinstall": "yarn frontend && yarn backend",
     "frontend": "( cd frontend && yarn && yarn build )",
@@ -8,7 +9,7 @@
     "start": "( cd backend && yarn start )"
   },
   "bin": {
-    "judgementalist": "yarn start"
+    "judgementalist": "cd backend && yarn start"
   },
   "description": "Judgementalist — judge Sherlock contests faster",
   "repository": "git@github.com:aviggiano/judgementalist.git",
