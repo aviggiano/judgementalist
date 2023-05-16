@@ -59,13 +59,17 @@ function Decision({ issue }: { issue: Issue }) {
               </Typography>
               <Autocomplete
                 onChange={(e) => {
-                  const decidedDuplication = e.target.value;
+                  const decidedDuplication = e.target.value || undefined;
 
                   const existingIssue = issues.find(
                     (i: Issue) => i.decidedDuplication === decidedDuplication
                   );
 
-                  if (decidedDuplication !== issue.title && !existingIssue)
+                  if (
+                    decidedDuplication !== issue.title &&
+                    decidedDuplication !== undefined &&
+                    !existingIssue
+                  )
                     return;
 
                   const decidedSeverity =

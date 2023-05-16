@@ -37,7 +37,7 @@ function App() {
           <Typography variant="h4">Judged</Typography>
           <Box
             sx={{
-              height: "calc(100vh - 80px)",
+              height: "calc(100vh - 60px)",
               display: "flex",
               flexDirection: "column",
               overflowY: "scroll",
@@ -75,7 +75,7 @@ function App() {
                 <IssueCard
                   key={issue.file}
                   issue={issue}
-                  at={`${index}/${sortedIssues.length}`}
+                  at={`${index + 1}/${sortedIssues.length}`}
                   onClick={() => setIssue(issue)}
                 />
               ))}

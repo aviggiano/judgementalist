@@ -39,7 +39,11 @@ export default function AutocompleteIssues({
     <Autocomplete
       id={id}
       options={values}
-      getOptionLabel={(option) => option.decidedDuplication || option.title}
+      getOptionLabel={(option) =>
+        option.decidedSeverity === "false"
+          ? ""
+          : option.decidedDuplication ?? option.title
+      }
       onSelect={onChange}
       groupBy={(option) => option.decidedDuplication || "N/A"}
       value={value}
