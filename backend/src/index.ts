@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import config from "./config";
-import { getIssue, getIssues, updateIssue } from "./database/issues";
+import { getIssue, getIssues, updateIssue, done } from "./database/issues";
 
 dotenv.config();
 
@@ -25,6 +25,11 @@ app.get("/issues/:file", async (req: Request, res: Response) => {
 
 app.patch("/issues/:file", async (req: Request, res: Response) => {
   res.json(await updateIssue(req.params.file, req.body));
+});
+
+app.post("/done", async (req: Request, res: Response) => {
+  await done();
+  res.json("Done");
 });
 
 app.listen(port, () => {

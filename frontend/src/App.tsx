@@ -8,7 +8,7 @@ import Decision from "./components/Decision";
 import DecidedIssueCard from "./components/DecidedIssueCard";
 
 function App() {
-  const { issues, issue, setIssue } = useContext(IssuesContext);
+  const { issues, issue, setIssue, done } = useContext(IssuesContext);
 
   const judged = issues
     .filter((issue) => issue.decidedSeverity)
@@ -89,7 +89,18 @@ function App() {
             padding: "10px",
           }}
         >
-          <Typography variant="h4">Issue</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography variant="h4">Issue</Typography>
+            <Box onClick={() => done()} sx={{ cursor: "pointer" }}>
+              <Typography variant="h4">🚀</Typography>
+            </Box>
+          </Box>
           <Box
             sx={{
               display: "flex",

@@ -54,6 +54,7 @@ interface IIssuesContext {
   issue?: Issue;
   setIssue: (issue: Issue) => void;
   updateIssue: (issue: Issue) => void;
+  done: () => void;
 }
 
 export const IssuesContext = createContext<IIssuesContext>(
@@ -90,8 +91,19 @@ export function IssuesProvider({ children }: Props) {
     });
   };
 
+  const done = () => {
+    fetch(`/done`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+  };
+
   return (
-    <IssuesContext.Provider value={{ issues, updateIssue, issue, setIssue }}>
+    <IssuesContext.Provider
+      value={{ issues, updateIssue, issue, setIssue, done }}
+    >
       {children}
     </IssuesContext.Provider>
   );

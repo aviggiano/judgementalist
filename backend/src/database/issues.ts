@@ -62,3 +62,37 @@ export async function updateIssue(file: string, issue: Issue): Promise<Issue> {
   await database.set("issues", issues);
   return issue;
 }
+
+export async function done(): Promise<void> {
+  const issues = await getIssues();
+
+  let cmd = "";
+
+  const severities = ["high", "medium"];
+  for (const severity of severities) {
+    const is = [
+      ...new Set(
+        issues
+          .filter((issue) => issue.decidedSeverity === severity)
+          .filter((issue) => issue.decidedDuplication)
+          .map((issue) => issue.decidedDuplication)
+      ),
+    ];
+    for (let i = 0; i < is.length; i++) {
+      const dir = `${(i + 1).toString().padStart(3, "0")}-${severity
+        .charAt(0)
+        .toUpperCase()}`;
+      cmd += `mkdir -p ${dir}\n`;
+
+      const duplicatedIssues = issues.filter(
+        (issue) => issue.decidedDuplication === is[i]
+      );
+      for (const issue of duplicatedIssues) {
+        cmd += `git mv ${issue.file} ${dir}/${
+          issue.decidedBest ? issue.file.replace(".md", "-best.md") : issue.file
+        }\n`;
+      }
+    }
+  }
+  console.log(cmd);
+}
