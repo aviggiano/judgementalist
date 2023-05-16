@@ -25,7 +25,13 @@ function Decision({ issue }: { issue: Issue }) {
       <Chip
         size="small"
         sx={{ cursor: "pointer", width: "100%" }}
-        onClick={() => updateIssue({ ...issue, decidedSeverity })}
+        onClick={() =>
+          updateIssue({
+            ...issue,
+            decidedSeverity,
+            decidedDuplication: issue.decidedDuplication || issue.title,
+          })
+        }
         label={decidedSeverity}
         color={color}
         variant={
