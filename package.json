@@ -6,7 +6,7 @@
     "contracts",
     "audit"
   ],
-  "version": "1.0.7",
+  "version": "1.0.8",
   "scripts": {
     "prepublish": "yarn frontend && yarn backend",
     "frontend": "( cd frontend && yarn && yarn build )",
@@ -17,7 +17,7 @@
     "frontend/build"
   ],
   "bin": {
-    "judgementalist": "backend/dist/index.js"
+    "judgementalist": "bin.sh"
   },
   "description": "Judgementalist — judge Sherlock contests faster",
   "repository": "git@github.com:aviggiano/judgementalist.git",
