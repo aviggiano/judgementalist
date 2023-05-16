@@ -8,17 +8,16 @@
   ],
   "version": "1.0.13",
   "scripts": {
-    "prepublish": "yarn frontend && yarn backend",
+    "prepublish": "yarn frontend && yarn backend && chmod +x backend/build/index.js",
     "frontend": "( cd frontend && yarn && yarn build )",
     "backend": "( cd backend && yarn && yarn build )"
   },
   "files": [
     "backend/build",
-    "frontend/build",
-    "bin.sh"
+    "frontend/build"
   ],
   "bin": {
-    "judgementalist": "bin.sh"
+    "judgementalist": "node backend/build/index.js"
   },
   "description": "Judgementalist — judge Sherlock contests faster",
   "repository": "git@github.com:aviggiano/judgementalist.git",
