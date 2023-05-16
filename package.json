@@ -1,7 +1,7 @@
 {
   "name": "judgementalist",
   "keywords": ["sherlock", "smart", "contracts", "audit"],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "postinstall": "yarn frontend && yarn backend",
     "frontend": "( cd frontend && yarn && yarn build )",
