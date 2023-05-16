@@ -9,7 +9,7 @@
     "start": "( cd backend && yarn start )"
   },
   "bin": {
-    "judgementalist": "cd backend && yarn start"
+    "judgementalist": "bin.sh"
   },
   "description": "Judgementalist — judge Sherlock contests faster",
   "repository": "git@github.com:aviggiano/judgementalist.git",
