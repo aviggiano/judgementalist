@@ -14,7 +14,9 @@
   },
   "files": [
     "backend/dist",
-    "frontend/build"
+    "backend/node_modules",
+    "frontend/build",
+    "bin"
   ],
   "bin": {
     "judgementalist": "bin.sh"
