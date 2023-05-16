@@ -18,10 +18,11 @@ npx judgementalist
 
 ## Key Features
 
-- Severity Assignment: The tool allows users to assign severity to each issue. This severity ranking is automatically updated in the UI
+- Local Development: This will run on your local machine, as judging contests should be confidential between Watsons
+- Severity Assignment: This allows users to assign the severity to each issue
 - Duplicates Detection: If you come across a duplicate issue, it can be easily identified and managed
-- Issue Handling: The tool lets you mark issues for further review. If you're unsure whether something is indeed an issue, you can mark it with a question mark and revisit it later
-- Best Issue Recognition: As Sherlock requires you to award the best issue, judgementalist enables you to do this by marking the best issue with a star.
+- Issue Handling: Mark issues for further review if you're unsure and want to revisit it later
+- Best Issue Recognition: Mark the best issue with a star so that it can be automatically selected for a report
 - Automatic File Renaming: When you're done, hit the rocket button to automatically move and rename all your files following Sherlock's requirements
 
 ## Contribute
