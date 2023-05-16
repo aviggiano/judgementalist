@@ -1,5 +1,19 @@
 import fs from "fs/promises";
+import cp from "child_process";
 import * as database from ".";
+
+async function exec(cmd: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    cp.exec(cmd, { maxBuffer: 1024 * 1024 * 2 }, (error, stdout, stderr) => {
+      if (error) {
+        console.error(stderr);
+        reject(error);
+      } else {
+        resolve(stdout.replace("\r", "").replace("\n", ""));
+      }
+    });
+  });
+}
 
 import { Watson, getWatsons } from "./watsons";
 
@@ -24,7 +38,6 @@ export async function getIssues(): Promise<Issue[]> {
   if (is) return is;
 
   const files = await fs.readdir(".");
-  console.log(files);
   const issuesList = files.filter((name) => name.match(/\d\d\d\.md/));
   const watsons = await getWatsons();
   const issues: Issue[] = await Promise.all(
@@ -84,7 +97,7 @@ export async function done(): Promise<void> {
       const dir = `${(i + 1).toString().padStart(3, "0")}-${severity
         .charAt(0)
         .toUpperCase()}`;
-      cmd += `mkdir -p ${dir}\n`;
+      cmd += `mkdir -p ${dir};\n`;
 
       const duplicatedIssues = issues.filter(
         (issue) => issue.decidedDuplication === is[i]
@@ -92,9 +105,9 @@ export async function done(): Promise<void> {
       for (const issue of duplicatedIssues) {
         cmd += `git mv ${issue.file} ${dir}/${
           issue.decidedBest ? issue.file.replace(".md", "-best.md") : issue.file
-        }\n`;
+        };\n`;
       }
     }
   }
-  console.log(cmd);
+  await exec(cmd);
 }
