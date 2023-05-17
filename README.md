@@ -6,7 +6,9 @@ https://www.loom.com/share/7bab4a0351e742de8b29b091d742b82f
 
 ## Overview
 
-Judgmentalist helps you judge Sherlock contests faster by eliminating the cumbersome task of managing multiple markdown files and taking notes on Google spreadsheets. Simply run `npx judgmentallist` in your judging repository and review all the issues related to the contest on your browser. You can then review each issue one by one, assigning severity rankings and making notes as needed.
+Judgmentalist helps you judge Sherlock contests faster by eliminating the cumbersome task of managing multiple markdown files and taking notes on Google spreadsheets. 
+
+Simply run `npx judgmentalist` in your judging repository and review all the issues related to the contest on your browser. You can then review each issue one by one, assigning severity rankings and making notes as needed.
 
 
 ## Usage
