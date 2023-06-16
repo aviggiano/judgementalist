@@ -26,8 +26,10 @@ npx judgementalist
 - Best Issue Recognition: Mark the best issue with a star so that it can be automatically selected for a report
 - Automatic File Renaming: When you're done, hit the rocket button to automatically move and rename all your files following Sherlock's requirements
 
-## Contribute
+## Warning
 
-PRs are welcome!
+The following known issues might affect your judging experience:
+- https://github.com/aviggiano/judgementalist/issues/1
+- https://github.com/aviggiano/judgementalist/issues/5
 
-Head out to [issues](https://github.com/aviggiano/judgementalist/issues) and help us improve!
+Pull requests are welcome!
