@@ -27,3 +27,4 @@ dist
 issues/
 build/
 db.json
+.data
